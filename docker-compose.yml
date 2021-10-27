@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  baget:
+    image: loicsharma/baget
+    env_file: ./Infrastructure/baget/baget.env
+    volumes:
+      - ./Infrastructure/baget/data:/var/baget
+    ports:
+      - "5555:80"
