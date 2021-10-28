@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VetClinicPublic.Configuration;
+using VetClinicPublic.Interfaces;
+using VetClinicPublic.Services;
 
 namespace VetClinicPublic
 {
@@ -21,6 +23,9 @@ namespace VetClinicPublic
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureFrom(_configuration);
+
+            services.AddSingleton<ISendEmail, SmtpEmailSender>();
+
             services.AddControllersWithViews();
         }
 
@@ -52,6 +57,9 @@ namespace VetClinicPublic
         {
             var siteConfiguration = configuration.GetSection("Site");
             services.Configure<SiteConfiguration>(siteConfiguration);
+
+            var mailConfiguration = configuration.GetSection("Mail");
+            services.Configure<MailConfiguration>(mailConfiguration);
         }
     }
 }
