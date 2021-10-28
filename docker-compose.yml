@@ -3,8 +3,15 @@ version: "3.9"
 services:
   baget:
     image: loicsharma/baget
+    container_name: ddd.baget
     env_file: ./Infrastructure/baget/baget.env
     volumes:
       - ./Infrastructure/baget/data:/var/baget
     ports:
       - "5555:80"
+  papercut:
+    image: jijiechen/papercut
+    container_name: ddd.papercut
+    ports:
+      - "25:25"
+      - "37408:37408"
