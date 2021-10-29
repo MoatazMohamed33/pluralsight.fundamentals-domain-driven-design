@@ -1,22 +1,31 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NArdalis.GuardClauses;
 using VetClinicPublic.Configuration;
 using VetClinicPublic.Interfaces;
+using VetClinicPublic.Models;
 
 namespace VetClinicPublic.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ISendEmail _mailSender;
         private readonly SiteConfiguration _siteConfiguration;
+        private readonly ISendEmail _mailSender;
 
-        public HomeController(ILogger<HomeController> logger, ISendEmail mailSender, IOptions<SiteConfiguration> siteConfiguration)
+        private readonly ISendConfirmationEmail _confirmationEmailSender;
+
+        public HomeController(ILogger<HomeController> logger,
+                              IOptions<SiteConfiguration> siteConfiguration,
+                              ISendEmail mailSender,
+                              ISendConfirmationEmail confirmationEmailSender)
         {
             _logger = logger;
+            _siteConfiguration = Guard.Against.Null(siteConfiguration?.Value, nameof(siteConfiguration));
             _mailSender = mailSender;
-            _siteConfiguration = siteConfiguration.Value;
+            _confirmationEmailSender = confirmationEmailSender;
         }
 
         public IActionResult Index()
@@ -39,6 +48,24 @@ namespace VetClinicPublic.Controllers
                 body: "This is just a test.");
 
             return Ok("Test email has been sent.");
+        }
+
+        public ActionResult TestConfirmationEmail(Guid id)
+        {
+            var testAppointment = new SendAppointmentConfirmationCommand
+            {
+                AppointmentId = id,
+                ClientEmailAddress = "client@test.com",
+                ClientName = "Mr. Test",
+                PatientName = "Testy",
+                AppointmentType = "Test",
+                DoctorName = "Dr. Test",
+                AppointmentStart = DateTime.Today
+            };
+
+            _confirmationEmailSender.SendConfirmationEmail(testAppointment);
+
+            return Ok("Test confirmation email has been sent.");
         }
     }
 }
