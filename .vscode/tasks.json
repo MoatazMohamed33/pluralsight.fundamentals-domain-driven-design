@@ -1,21 +1,46 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "build:vcp",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/VetClinicPublic/VetClinicPublic.sln",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile",
-            "group": {
-              "kind": "build",
-              "isDefault": true
-            }
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build:vcp",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/VetClinicPublic/VetClinicPublic.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "build:nagc",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/Packages/NArdalis.GuardClauses/NArdalis.GuardClauses.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "pack:nagc",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "pack",
+        "${workspaceFolder}/Packages/NArdalis.GuardClauses/NArdalis.GuardClauses.csproj",
+        "/property:Configuration=Release"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "none"
+    }
+  ]
 }
