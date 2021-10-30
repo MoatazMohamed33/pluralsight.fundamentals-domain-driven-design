@@ -15,3 +15,13 @@ services:
     ports:
       - "25:25"
       - "37408:37408"
+  seq:
+    image: datalust/seq
+    container_name: ddd.seq
+    env_file: ./Infrastructure/seq/seq.env
+    volumes:
+      - ./Infrastructure/seq/data:/data
+    ports:
+      - "5566:80" # UI & ingestion
+      - "5567:5341" # ingestion only
+
