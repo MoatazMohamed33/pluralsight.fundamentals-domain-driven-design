@@ -15,7 +15,7 @@ namespace VetClinicPublic.Services
 
         public void Publish(AppointmentConfirmLinkClickedIntegrationEvent eventToPublish)
         {
-            _logger.LogInformation("Published event {Event}, {Id}", eventToPublish.EventType, eventToPublish.Id);
+            _logger.LogInformation("Published event {@Event}", eventToPublish);
         }
     }
 }

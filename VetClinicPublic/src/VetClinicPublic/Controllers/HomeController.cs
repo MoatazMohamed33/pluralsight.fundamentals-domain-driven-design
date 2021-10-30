@@ -52,6 +52,8 @@ namespace VetClinicPublic.Controllers
 
         public ActionResult TestConfirmationEmail(Guid id)
         {
+            _logger.LogInformation("Hit the Home/TestConfirmationEmail route with {Id}", id);
+
             var testAppointment = new SendAppointmentConfirmationCommand
             {
                 AppointmentId = id,
