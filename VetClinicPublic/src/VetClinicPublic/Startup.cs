@@ -26,6 +26,7 @@ namespace VetClinicPublic
 
             services.AddSingleton<ISendEmail, SmtpEmailSender>();
             services.AddSingleton<ISendConfirmationEmail, ConfirmationEmailSender>();
+            services.AddSingleton<IMessagePublisher, LoggingMessagePublisher>();
 
             services.AddControllersWithViews();
         }
