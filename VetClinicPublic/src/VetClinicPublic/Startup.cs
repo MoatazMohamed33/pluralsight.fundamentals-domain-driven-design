@@ -57,11 +57,11 @@ namespace VetClinicPublic
     {
         internal static void ConfigureFrom(this IServiceCollection services, IConfiguration configuration)
         {
-            var siteConfiguration = configuration.GetSection("Site");
-            services.Configure<SiteConfiguration>(siteConfiguration);
+            Configure<SiteConfiguration>("Site");
+            Configure<MailConfiguration>("Mail");
+            Configure<RabbitMqConfiguration>("RabbitMq");
 
-            var mailConfiguration = configuration.GetSection("Mail");
-            services.Configure<MailConfiguration>(mailConfiguration);
+            void Configure<T>(string section) where T : class => services.Configure<T>(configuration.GetSection(section));
         }
     }
 }
