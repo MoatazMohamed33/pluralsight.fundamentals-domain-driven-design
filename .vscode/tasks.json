@@ -18,6 +18,19 @@
       }
     },
     {
+      "label": "build:sk",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/SharedKernel/SharedKernel.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
       "label": "build:nagc",
       "command": "dotnet",
       "type": "process",
@@ -37,6 +50,18 @@
       "args": [
         "pack",
         "${workspaceFolder}/Packages/NArdalis.GuardClauses/NArdalis.GuardClauses.csproj",
+        "/property:Configuration=Release"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": "none"
+    },
+    {
+      "label": "pack:sk",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "pack",
+        "${workspaceFolder}/SharedKernel/src/SharedKernel/SharedKernel.csproj",
         "/property:Configuration=Release"
       ],
       "problemMatcher": "$msCompile",
