@@ -9,12 +9,14 @@ services:
       - ./Infrastructure/baget/data:/var/baget
     ports:
       - "5555:80"
+
   papercut:
     image: jijiechen/papercut
     container_name: ddd.papercut
     ports:
       - "25:25"
       - "37408:37408"
+
   seq:
     image: datalust/seq
     container_name: ddd.seq
@@ -25,3 +27,10 @@ services:
       - "5566:80" # UI & ingestion
       - "5567:5341" # ingestion only
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: ddd.rabbitmq
+    env_file: ./Infrastructure/rabbitmq/rabbitmq.env
+    ports:
+      - "5672:5672"
+      - "15672:15672"

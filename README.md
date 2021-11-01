@@ -11,3 +11,4 @@ _This course will teach you the fundamentals of Domain- Driven Design (DDD) thro
 | BaGet    | http://localhost:5555/v3/index.json | NuGet server   |
 | Papercut | http://localhost:37408              | Mail server    |
 | Seq      | http://localhost:5566/#/events      | Logging server |
+| RabbitMQ | http://localhost:15672/             | Message broker |
