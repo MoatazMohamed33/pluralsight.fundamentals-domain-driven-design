@@ -1,8 +1,12 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.ObjectPool;
+using RabbitMQ.Client;
+using VetClinicPublic.BackgroundServices;
 using VetClinicPublic.Configuration;
 using VetClinicPublic.Interfaces;
 using VetClinicPublic.Services;
@@ -23,6 +27,8 @@ namespace VetClinicPublic
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureFrom(_configuration);
+
+            services.AddHostedService<FrontDeskRabbitMqService>();
 
             services.AddSingleton<ISendEmail, SmtpEmailSender>();
             services.AddSingleton<ISendConfirmationEmail, ConfirmationEmailSender>();
