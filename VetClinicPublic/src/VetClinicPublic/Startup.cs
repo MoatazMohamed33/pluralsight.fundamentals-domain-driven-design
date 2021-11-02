@@ -26,7 +26,8 @@ namespace VetClinicPublic
 
             services.AddSingleton<ISendEmail, SmtpEmailSender>();
             services.AddSingleton<ISendConfirmationEmail, ConfirmationEmailSender>();
-            services.AddSingleton<IMessagePublisher, LoggingMessagePublisher>();
+            services.AddSingleton<IPooledObjectPolicy<IModel>, RabbitMqModelPooledObjectPolicy>();
+            services.AddSingleton<IMessagePublisher, RabbitMqMessagePublisher>();
 
             services.AddControllersWithViews();
         }
