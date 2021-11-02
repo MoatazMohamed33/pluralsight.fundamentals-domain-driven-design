@@ -19,7 +19,7 @@ namespace VetClinicPublic.Controllers
 
         public ActionResult Confirm(Guid id)
         {
-            _logger.LogInformation("Hit the Appointment/Confirm route with {Id}", id);
+            _logger.LogInformation("Hit the Appointment/Confirm route with {AppointmentId}", id);
 
             var @event = new AppointmentConfirmLinkClickedIntegrationEvent(id);
             _messagePublisher.Publish(@event);

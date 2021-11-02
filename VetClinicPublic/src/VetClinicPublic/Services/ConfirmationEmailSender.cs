@@ -24,7 +24,7 @@ namespace VetClinicPublic.Services
 
         public void SendConfirmationEmail(SendAppointmentConfirmationCommand appointment)
         {
-            _logger.LogInformation("Sending email to confirm appointment: {Appointment}", appointment);
+            _logger.LogInformation("Sending email to confirm appointment: {AppointmentId}", appointment.AppointmentId);
 
             // TODO: Confirmation URL should be set in `appsettings.json`
             string confirmUrl = $"http://localhost:{_siteConfiguration.Port}/appointment/confirm/{appointment.AppointmentId}";
