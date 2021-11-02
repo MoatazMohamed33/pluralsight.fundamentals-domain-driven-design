@@ -30,6 +30,7 @@ namespace VetClinicPublic
             services.AddSingleton<IMessagePublisher, RabbitMqMessagePublisher>();
 
             services.AddControllersWithViews();
+            services.AddMediatR(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

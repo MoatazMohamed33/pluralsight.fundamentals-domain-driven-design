@@ -1,8 +1,9 @@
 using System;
+using MediatR;
 
 namespace VetClinicPublic.Models
 {
-    public class SendAppointmentConfirmationCommand
+    public class SendAppointmentConfirmationCommand : IRequest
     {
         public Guid AppointmentId { get; set; }
         public string ClientName { get; set; }
