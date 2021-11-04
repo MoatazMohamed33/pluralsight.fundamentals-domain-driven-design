@@ -6,12 +6,13 @@ _This course will teach you the fundamentals of Domain- Driven Design (DDD) thro
 
 # Services
 
-| Service  | Url                                 | Description    |
-| -------- | ----------------------------------- | -------------- |
-| BaGet    | http://localhost:5555/v3/index.json | NuGet server   |
-| Papercut | http://localhost:37408              | Mail server    |
-| Seq      | http://localhost:5566/#/events      | Logging server |
-| RabbitMQ | http://localhost:15672/             | Message broker |
+| Service         | Url                                 | Description     |
+| --------------- | ----------------------------------- | --------------- |
+| BaGet           | http://localhost:5555/v3/index.json | NuGet server    |
+| Papercut        | http://localhost:37408              | Mail server     |
+| Seq             | http://localhost:5566/#/events      | Logging server  |
+| RabbitMQ        | http://localhost:15672/             | Message broker  |
+| VetClinicPublic | http://localhost:5000/              | VetClinicPublic |
 
 # Messages
 
@@ -26,7 +27,7 @@ RoutingKey: `appointment-scheduled`
   "ClientEmailAddress": "rabbit@test.com",
   "ClientName": "Mr. Test",
   "DoctorName": "Dr. Test",
-  "PatientName": "Lil' Test",
+  "PatientName": "Beef",
   "AppointmentStart": "2021-11-01T21:45:00"
 }
 ```

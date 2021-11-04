@@ -24,8 +24,8 @@ services:
     volumes:
       - ./Infrastructure/seq/data:/data
     ports:
+      - "5341" # ingestion only
       - "5566:80" # UI & ingestion
-      - "5567:5341" # ingestion only
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -39,3 +39,11 @@ services:
     build:
       context: ./VetClinicPublic/src/VetClinicPublic
       network: host
+    container_name: ddd.vetclinicpublic
+    env_file: ./VetClinicPublic/src/VetClinicPublic/app.env
+    ports:
+      - "5000:80"
+    depends_on:
+      - rabbitmq
+      - papercut
+      - seq
