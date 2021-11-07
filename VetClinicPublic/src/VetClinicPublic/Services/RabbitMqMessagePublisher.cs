@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using System.Text.Json;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.ObjectPool;
 using NArdalis.GuardClauses;
 using RabbitMQ.Client;
@@ -13,12 +12,10 @@ namespace VetClinicPublic.Services
 {
     public class RabbitMqMessagePublisher : IMessagePublisher
     {
-        private readonly ILogger<RabbitMqMessagePublisher> _logger;
         private readonly DefaultObjectPool<IModel> _objectPool;
 
-        public RabbitMqMessagePublisher(ILogger<RabbitMqMessagePublisher> logger, IPooledObjectPolicy<IModel> objectPolicy)
+        public RabbitMqMessagePublisher(IPooledObjectPolicy<IModel> objectPolicy)
         {
-            _logger = logger;
             _objectPool = new DefaultObjectPool<IModel>(objectPolicy, Environment.ProcessorCount * 2);
         }
 
@@ -31,7 +28,7 @@ namespace VetClinicPublic.Services
 
             try
             {
-                string exchageName = MessagingConstants.Exchanges.FRONTDESK_VETCLINICPUBLIC_EXCHANGE;
+                var exchageName = MessagingConstants.Exchanges.FRONTDESK_VETCLINICPUBLIC_EXCHANGE;
                 channel.ExchangeDeclare(exchange: exchageName,
                                         type: "direct",
                                         durable: true,

@@ -29,7 +29,7 @@ namespace VetClinicPublic.Services
             return false;
         }
 
-        private IConnection GetConnection(RabbitMqConfiguration configuration)
+        private static IConnection GetConnection(RabbitMqConfiguration configuration)
         {
             var factory = new ConnectionFactory
             {

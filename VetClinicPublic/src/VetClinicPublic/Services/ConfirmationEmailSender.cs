@@ -27,11 +27,11 @@ namespace VetClinicPublic.Services
             _logger.LogInformation("Sending email to confirm appointment: {AppointmentId}", appointment.AppointmentId);
 
             // TODO: Confirmation URL should be set in `appsettings.json`
-            string confirmUrl = $"http://localhost:{_siteConfiguration.Port}/appointment/confirm/{appointment.AppointmentId}";
-            const string from = "donotreply@thevetclinic.com";
-            string to = appointment.ClientEmailAddress;
-            string subject = $"Vet Appointment Confirmation for {appointment.PatientName}";
-            string body = $@"
+            var confirmUrl = $"http://localhost:{_siteConfiguration.Port}/appointment/confirm/{appointment.AppointmentId}";
+            var from = "donotreply@thevetclinic.com";
+            var to = appointment.ClientEmailAddress;
+            var subject = $"Vet Appointment Confirmation for {appointment.PatientName}";
+            var body = $@"
 <html>
 <body>
     Dear {appointment.ClientName},<br/>

@@ -69,7 +69,7 @@ namespace VetClinicPublic.BackgroundServices
                                       autoDelete: false,
                                       arguments: null);
 
-                string routingKey = "appointment-scheduled";
+                var routingKey = "appointment-scheduled";
                 _channel.QueueBind(queue: _queueIn,
                                    exchange: _exchangeName,
                                    routingKey);
@@ -86,12 +86,19 @@ namespace VetClinicPublic.BackgroundServices
 
         public override void Dispose()
         {
-            _channel.Close();
-            _connection.Close();
-            _channel.Dispose();
-            _connection.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-            base.Dispose();
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _channel?.Close();
+                _connection?.Close();
+                _channel?.Dispose();
+                _connection?.Dispose();
+            }
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
